@@ -6,6 +6,7 @@ import { api } from '../api/api';
 const Products = React.memo(({ data,newProductId}) => {
   const [search, setSearch] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(data || []);
+  const[searchProduct,setSearchProduct] =  useState(true)
  
   
   useEffect(() => {
@@ -20,6 +21,7 @@ const Products = React.memo(({ data,newProductId}) => {
       if (search.trim() !== '') {
         searchProducts(search);
       } else {
+        setSearchProduct(true)
         setFilteredProducts(data); 
       }
     }, 400);
@@ -31,9 +33,11 @@ const Products = React.memo(({ data,newProductId}) => {
   const searchProducts = async (query) => {
     try {
       const res = await api.get(`/api/products/search?query=${encodeURIComponent(query)}`);
-      console.log(res)
+    
+      setSearchProduct(true)
       setFilteredProducts(res.data.products);
     } catch (error) {
+      setSearchProduct(false)
       console.error('Error searching products:', error);
     }
   };
@@ -49,6 +53,8 @@ const Products = React.memo(({ data,newProductId}) => {
   return (
     <div className="p-4 max-w-5xl mx-auto bg-gray-50">
       <h1 className="text-3xl font-extrabold mb-6 text-center text-indigo-700">List of Products</h1>
+   
+        
       <input
         type="text"
         placeholder="Search products..."
@@ -56,7 +62,8 @@ const Products = React.memo(({ data,newProductId}) => {
         onChange={(e) => setSearch(e.target.value)}
         className="w-full p-3 border border-indigo-300 rounded-lg mb-8 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
-
+   {searchProduct ? ( 
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts?.map((product) => (
        <div
@@ -83,6 +90,12 @@ const Products = React.memo(({ data,newProductId}) => {
           </div>
         ))}
       </div>
+      </>
+):(
+  <div className="text-center text-sm mt-6 text-red-500">No product found</div> 
+)
+}
+
     </div>
   );
 });

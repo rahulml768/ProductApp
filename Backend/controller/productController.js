@@ -115,7 +115,8 @@ export const searchProduct =async(req,res,next)=>{
             {name:{$regex:query,$options:"i"}},
             {description:{$regex:query,$options:"i"}}
         ]
-    })
+    });
+   
     if (products.length === 0) {
         return res.status(404).json({message:"No product found"})
     }

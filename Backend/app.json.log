@@ -40,3 +40,4 @@
 {"level":"error","message":"Internal server error: Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"products\"","timestamp":"2025-05-25T08:13:52.699Z"}
 {"level":"error","message":"Internal server error: Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"products\"","timestamp":"2025-05-25T08:15:14.087Z"}
 {"level":"error","message":"Internal server error: Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"products\"","timestamp":"2025-05-25T08:15:18.102Z"}
+{"level":"error","message":"No product found","timestamp":"2025-05-26T13:44:20.536Z"}
