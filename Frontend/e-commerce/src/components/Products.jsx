@@ -80,7 +80,7 @@ const Products = React.memo(({ data,newProductId}) => {
             />
             <h2 className="text-xl font-semibold text-indigo-600">{product.name}</h2> 
             <p className="text-indigo-500 mb-3 line-clamp-1">{product.description}</p> 
-            <p className="font-bold text-indigo-700 mb-5">₹ {product.price}</p>;
+            <p className="font-bold text-indigo-700 mb-5">₹ {product.price}</p>
             <Link
               to={`/products/${product._id}`}
               className="text-indigo-600 text-sm flex items-center gap-2 hover:underline"
@@ -97,7 +97,7 @@ const Products = React.memo(({ data,newProductId}) => {
 }
 
     </div>
-  );
+  )
 });
 
 export default Products;

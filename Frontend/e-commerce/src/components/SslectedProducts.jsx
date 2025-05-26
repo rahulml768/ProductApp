@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
 import { api } from '../api/api.jsx';
 
 const SelectedProduct = () => {
   const { id } = useParams();
-  const [selectedProduct, setSelectedProduct] = useState(null);
-//get selectedProduct from server
-  const { isLoading, error } = useQuery({
+
+  const {
+    isLoading,
+    error,
+    data: selectedProduct,
+  } = useQuery({
     queryKey: ['selectedProduct', id],
     queryFn: async () => {
       const res = await api.get(`/api/products/${id}`);
-      if (res.status === 200) {
-        setSelectedProduct(res.data.selectedProduct);
-        return res.data.selectedProduct;
-      }
+      return res.data.selectedProduct;
     },
+    staleTime: 5 * 60 * 1000, 
+    retry: false,
   });
 
   if (isLoading) {
     return <div className="text-center py-10 text-gray-500">Loading...</div>;
   }
 
-
   if (error || !selectedProduct) {
     return <div className="text-center py-10 text-red-500">Product not found</div>;
   }
-//design the selectedProduct
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <div className="bg-gradient-to-r from-indigo-50 to-blue-50 p-8 rounded-3xl shadow-xl">
