@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@keyframes highlight {
+    0% {
+      background-color: #bfdbfe; 
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  
+  .animate-highlight {
+    animation: highlight 2s ease-in-out;
+  }
